@@ -35,9 +35,9 @@ const PizzaSchema = new Schema ({
 );
 
 // get total count of comments and replies on retrieval    // ** WHY IS THE COMMENT COUNT DIFFERENT DEPENDING ON LOOKING AT THE /API/COMMENT route vs. /API/PIZZA route??** BUT ALSO DISPLAYING CORRECTLY ON FRONTEND
-PizzaSchema.virtual("commentCount").get(function() {
-    return this.comments.length;
-});
+PizzaSchema.virtual('commentCount').get(function() {
+    return this.comments.reduce((total, comment) => total + comment.replies.length + 1, 0);
+  });
 
 
 
